@@ -118,7 +118,7 @@ api.searchZipPostcode('08080', 'es')
 ```
 ### Para obtener el pronostico del tiempo de 5 días
 
-Puede buscar el pronóstico del tiempo durante 5 días con datos cada 3 horas por nombre de ciudad.
+Puede buscar el pronóstico del tiempo durante 5 días con datos cada 3 horas por nombre de ciudad añadiendo el flag true como ultimo parámetro.
 
 * Obtener el tiempo actual buscando mediante el nombre del lugar
 
@@ -127,7 +127,7 @@ const m = lib.ApiService;
 
 const api = new m('your-apiKey', 'es', 'm');
 
-api.searchByName('Barcelona', 'es', 5)
+api.searchByName('Barcelona', 'es', true)
     .then(data => {
 
         const { list } = data;
@@ -147,7 +147,7 @@ const m = lib.ApiService;
 
 const api = new m('your-apiKey', 'es', 'm');
 
-api.searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }, 5)
+api.searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }, true)
     .then(data => {
 
         const { list } = data;
@@ -167,7 +167,7 @@ const m = lib.ApiService;
 
 const api = new m('your-apiKey', 'es', 'm');
 
-api.searchZipPostcode('08080', 'es', 5)
+api.searchZipPostcode('08080', 'es', true)
     .then(data => {
 
         const { list } = data;

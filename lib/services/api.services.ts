@@ -50,7 +50,7 @@ export class ApiService {
      * @example
      * searchByName('Barcelona', 'es'); || searchByName('Barcelona', 'es', 5);
      */
-    public searchByName = (name: string, codCountry: string = '', anticipation: number = 0) => {
+    public searchByName = (name: string, codCountry: string = '', anticipation: boolean = false) => {
 
         const filter = (codCountry === '') ? `q=${name}` : `q=${name},${codCountry}`;
         return this.requestApi(filter, anticipation);
@@ -64,7 +64,7 @@ export class ApiService {
      * @example
      * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }); || searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }, 5);
      */
-    public searchByGeolocationGeographic = (location: Coord, anticipation: number = 0) => {
+    public searchByGeolocationGeographic = (location: Coord, anticipation: boolean = false) => {
 
         const filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : `lat=${location.lat}&lon=${location.lon}`;
         return this.requestApi(filter, anticipation);
@@ -79,7 +79,7 @@ export class ApiService {
      * @example
      * searchZipPostcode('08080', 'es'); || searchZipPostcode('08080', 'es', 5);
      */
-    public searchZipPostcode = (cp: string, codCountry: string = '', anticipation: number = 0) => {
+    public searchZipPostcode = (cp: string, codCountry: string = '', anticipation: boolean = false) => {
 
         const filter = (codCountry === '') ? `zip=${cp}` : `zip=${cp},${codCountry}`;
         return this.requestApi(filter, anticipation);
@@ -91,13 +91,12 @@ export class ApiService {
      * @param filter {string} filtro por el que se quiere busca.
      * @param anticipation {number} Días de previsión.
      */
-    private requestApi = (filter: string, anticipation: number) => {
+    private requestApi = (filter: string, anticipation: boolean) => {
 
-        anticipation = (anticipation !== 5 || isNaN(anticipation)) ? 0 : 5;
         const params = `${this.units}${this.lang}&appid=${this.APIKEY}`;
 
         // Llamada a la API
-        const url = (anticipation === 5) ? `${URL_LOCALHOST}${FORECAST}${filter}${params}` : `${URL_LOCALHOST}${CURRENT}${filter}${params}`;
+        const url = (anticipation) ? `${URL_LOCALHOST}${FORECAST}${filter}${params}` : `${URL_LOCALHOST}${CURRENT}${filter}${params}`;
 
         return axios.get(url)
             .then(e => e.data)

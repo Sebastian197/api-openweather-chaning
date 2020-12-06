@@ -31,7 +31,7 @@ export declare class ApiService {
      * @example
      * searchByName('Barcelona', 'es'); || searchByName('Barcelona', 'es', 5);
      */
-    searchByName: (name: string, codCountry?: string, anticipation?: number) => Promise<any>;
+    searchByName: (name: string, codCountry?: string, anticipation?: boolean) => Promise<any>;
     /**
      * Método para obtener el tiempo actual mediante la localización.
      * @param location {Object} Coordenadas del lugar por el que se quiere buscar.
@@ -39,7 +39,7 @@ export declare class ApiService {
      * @example
      * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }); || searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }, 5);
      */
-    searchByGeolocationGeographic: (location: Coord, anticipation?: number) => Promise<any>;
+    searchByGeolocationGeographic: (location: Coord, anticipation?: boolean) => Promise<any>;
     /**
      * Método para obtener el tiempo actual mediante el código postal del lugar.
      * @param cp {string} Código postal del lugar.
@@ -48,7 +48,7 @@ export declare class ApiService {
      * @example
      * searchZipPostcode('08080', 'es'); || searchZipPostcode('08080', 'es', 5);
      */
-    searchZipPostcode: (cp: string, codCountry?: string, anticipation?: number) => Promise<any>;
+    searchZipPostcode: (cp: string, codCountry?: string, anticipation?: boolean) => Promise<any>;
     /**
      * Método privado que llama a la api con el fitro por el que se desea buscar.
      * @param filter {string} filtro por el que se quiere busca.

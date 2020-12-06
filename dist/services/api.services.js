@@ -47,7 +47,7 @@ var ApiService = /** @class */ (function () {
          */
         this.searchByName = function (name, codCountry, anticipation) {
             if (codCountry === void 0) { codCountry = ''; }
-            if (anticipation === void 0) { anticipation = 0; }
+            if (anticipation === void 0) { anticipation = false; }
             var filter = (codCountry === '') ? "q=" + name : "q=" + name + "," + codCountry;
             return _this.requestApi(filter, anticipation);
         };
@@ -59,7 +59,7 @@ var ApiService = /** @class */ (function () {
          * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }); || searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }, 5);
          */
         this.searchByGeolocationGeographic = function (location, anticipation) {
-            if (anticipation === void 0) { anticipation = 0; }
+            if (anticipation === void 0) { anticipation = false; }
             var filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : "lat=" + location.lat + "&lon=" + location.lon;
             return _this.requestApi(filter, anticipation);
         };
@@ -73,7 +73,7 @@ var ApiService = /** @class */ (function () {
          */
         this.searchZipPostcode = function (cp, codCountry, anticipation) {
             if (codCountry === void 0) { codCountry = ''; }
-            if (anticipation === void 0) { anticipation = 0; }
+            if (anticipation === void 0) { anticipation = false; }
             var filter = (codCountry === '') ? "zip=" + cp : "zip=" + cp + "," + codCountry;
             return _this.requestApi(filter, anticipation);
         };
@@ -83,10 +83,9 @@ var ApiService = /** @class */ (function () {
          * @param anticipation {number} Días de previsión.
          */
         this.requestApi = function (filter, anticipation) {
-            anticipation = (anticipation !== 5 || isNaN(anticipation)) ? 0 : 5;
             var params = "" + _this.units + _this.lang + "&appid=" + _this.APIKEY;
             // Llamada a la API
-            var url = (anticipation === 5) ? "" + constants_1.URL_LOCALHOST + constants_1.FORECAST + filter + params : "" + constants_1.URL_LOCALHOST + constants_1.CURRENT + filter + params;
+            var url = (anticipation) ? "" + constants_1.URL_LOCALHOST + constants_1.FORECAST + filter + params : "" + constants_1.URL_LOCALHOST + constants_1.CURRENT + filter + params;
             return axios_1.default.get(url)
                 .then(function (e) { return e.data; })
                 .catch(function (error) { return error; });
