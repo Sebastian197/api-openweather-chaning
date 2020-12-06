@@ -95,7 +95,7 @@ export class ApiService {
     /**
      * Método privado que llama a la api con el fitro por el que se desea buscar.
      * @param filter {string} filtro por el que se quiere busca.
-     * @param anticipation {number} Días de previsión.
+     * @param anticipation {boolean} Flag de previsión.
      * @returns
      * Promise<any>
      */
