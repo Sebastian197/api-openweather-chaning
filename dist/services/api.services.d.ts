@@ -14,17 +14,17 @@ export declare class ApiService {
      */
     constructor(APIKEY: string, lang?: string, units?: string);
     /**
-     * Función para inicializar el código del idioma.
+     * Método privado para inicializar el código del idioma.
      * @param lang {string} Código del idioma.
      */
     private configLanguage;
     /**
-     * Función privada para inicializar la unidad métrica en la que se medira los datos.
+     * Método privado para inicializar la unidad métrica en la que se medira los datos.
      * @param unit {string} Métrica de los datos.
      */
     private configUnits;
     /**
-     * Obtener el tiempo actual buscando mediante el nombre del lugar.
+     * Método para obtener el tiempo actual buscando mediante el nombre del lugar.
      * @param name {string} nombre del lugar.
      * @param codCountry {string} Código del país.
      * @example
@@ -32,19 +32,23 @@ export declare class ApiService {
      */
     searchByName: (name: string, codCountry?: string) => Promise<any>;
     /**
-     * Obtener el tiempo actual mediante la localización.
+     * Método para obtener el tiempo actual mediante la localización.
      * @param location {Object} Coordenadas del lugar por el que se quiere buscar.
      * @example
      * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 });
      */
     searchByGeolocationGeographic: (location: Coord) => Promise<any>;
     /**
-     * Obtener el tiempo actual mediante el código postal del lugar.
+     * Método para obtener el tiempo actual mediante el código postal del lugar.
      * @param cp {string} Código postal del lugar.
      * @param codCountry {string} Código del país del lugar.
      * @example
      * searchZipPostcode('08080', 'es');
      */
     searchZipPostcode: (cp: string, codCountry?: string) => Promise<any>;
+    /**
+     * Método privado que llama a la api con el fitro por el que se desea buscar.
+     * @param filter {string} filtro por el que se quiere buscar
+     */
     private requestApi;
 }

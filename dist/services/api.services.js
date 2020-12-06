@@ -22,7 +22,7 @@ var ApiService = /** @class */ (function () {
         if (lang === void 0) { lang = 'es'; }
         if (units === void 0) { units = 'metric'; }
         /**
-         * Función para inicializar el código del idioma.
+         * Método privado para inicializar el código del idioma.
          * @param lang {string} Código del idioma.
          */
         this.configLanguage = function (lang) {
@@ -31,14 +31,14 @@ var ApiService = /** @class */ (function () {
                 : _this.lang = '&lang=es';
         };
         /**
-         * Función privada para inicializar la unidad métrica en la que se medira los datos.
+         * Método privado para inicializar la unidad métrica en la que se medira los datos.
          * @param unit {string} Métrica de los datos.
          */
         this.configUnits = function (unit) {
             _this.units = (unit === 'm' || unit === 'metric') ? '&units=metric' : '';
         };
         /**
-         * Obtener el tiempo actual buscando mediante el nombre del lugar.
+         * Método para obtener el tiempo actual buscando mediante el nombre del lugar.
          * @param name {string} nombre del lugar.
          * @param codCountry {string} Código del país.
          * @example
@@ -50,7 +50,7 @@ var ApiService = /** @class */ (function () {
             return _this.requestApi(filter);
         };
         /**
-         * Obtener el tiempo actual mediante la localización.
+         * Método para obtener el tiempo actual mediante la localización.
          * @param location {Object} Coordenadas del lugar por el que se quiere buscar.
          * @example
          * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 });
@@ -60,7 +60,7 @@ var ApiService = /** @class */ (function () {
             return _this.requestApi(filter);
         };
         /**
-         * Obtener el tiempo actual mediante el código postal del lugar.
+         * Método para obtener el tiempo actual mediante el código postal del lugar.
          * @param cp {string} Código postal del lugar.
          * @param codCountry {string} Código del país del lugar.
          * @example
@@ -71,6 +71,10 @@ var ApiService = /** @class */ (function () {
             var filter = (codCountry === '') ? "zip=" + cp : "zip=" + cp + "," + codCountry;
             return _this.requestApi(filter);
         };
+        /**
+         * Método privado que llama a la api con el fitro por el que se desea buscar.
+         * @param filter {string} filtro por el que se quiere buscar
+         */
         this.requestApi = function (filter) {
             var params = "" + _this.units + _this.lang + "&appid=" + _this.APIKEY;
             // Llamada a la API

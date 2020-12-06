@@ -25,7 +25,7 @@ export class ApiService {
     };
 
     /**
-     * Función para inicializar el código del idioma.
+     * Método privado para inicializar el código del idioma.
      * @param lang {string} Código del idioma.
      */
     private configLanguage = (lang: string) => {
@@ -35,7 +35,7 @@ export class ApiService {
     };
 
     /**
-     * Función privada para inicializar la unidad métrica en la que se medira los datos.
+     * Método privado para inicializar la unidad métrica en la que se medira los datos.
      * @param unit {string} Métrica de los datos.
      */
     private configUnits = (unit: string) => {
@@ -43,7 +43,7 @@ export class ApiService {
     };
 
     /**
-     * Obtener el tiempo actual buscando mediante el nombre del lugar.
+     * Método para obtener el tiempo actual buscando mediante el nombre del lugar.
      * @param name {string} nombre del lugar.
      * @param codCountry {string} Código del país.
      * @example
@@ -57,7 +57,7 @@ export class ApiService {
     };
 
     /**
-     * Obtener el tiempo actual mediante la localización.
+     * Método para obtener el tiempo actual mediante la localización.
      * @param location {Object} Coordenadas del lugar por el que se quiere buscar.
      * @example
      * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 });
@@ -70,7 +70,7 @@ export class ApiService {
     };
 
     /**
-     * Obtener el tiempo actual mediante el código postal del lugar.
+     * Método para obtener el tiempo actual mediante el código postal del lugar.
      * @param cp {string} Código postal del lugar.
      * @param codCountry {string} Código del país del lugar.
      * @example
@@ -83,6 +83,10 @@ export class ApiService {
 
     };
 
+    /**
+     * Método privado que llama a la api con el fitro por el que se desea buscar.
+     * @param filter {string} filtro por el que se quiere buscar
+     */
     private requestApi = (filter: string) => {
 
         const params = `${this.units}${this.lang}&appid=${this.APIKEY}`;
