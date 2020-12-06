@@ -50,12 +50,10 @@ export class ApiService {
      * searchByName('Barcelona', 'es');
      */
     public searchByName = (name: string, codCountry: string = '') => {
-        const filter = (codCountry === '') ? `q=${name}` : `q=${name},${codCountry}`;
 
-        /*return axios.get(url)
-            .then(e => e.data)
-            .catch(error => error);*/
+        const filter = (codCountry === '') ? `q=${name}` : `q=${name},${codCountry}`;
         return this.requestApi(filter);
+
     };
 
     /**
@@ -65,12 +63,10 @@ export class ApiService {
      * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 });
      */
     public searchByGeolocationGeographic = (location: Coord) => {
-        const filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : `lat=${location.lat}&lon=${location.lon}`;
 
-        /*return axios.get(url)
-            .then(e => e.data)
-            .catch(error => error);*/
+        const filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : `lat=${location.lat}&lon=${location.lon}`;
         return this.requestApi(filter);
+
     };
 
     /**
@@ -81,12 +77,10 @@ export class ApiService {
      * searchZipPostcode('08080', 'es');
      */
     public searchZipPostcode = (cp: string, codCountry: string = '') => {
-        const filter = (codCountry === '') ? `zip=${cp}` : `zip=${cp},${codCountry}`;
 
-        /*return axios.get(url)
-            .then(e => e.data)
-            .catch(error => error);*/
+        const filter = (codCountry === '') ? `zip=${cp}` : `zip=${cp},${codCountry}`;
         return this.requestApi(filter);
+
     };
 
     private requestApi = (filter: string) => {

@@ -47,9 +47,6 @@ var ApiService = /** @class */ (function () {
         this.searchByName = function (name, codCountry) {
             if (codCountry === void 0) { codCountry = ''; }
             var filter = (codCountry === '') ? "q=" + name : "q=" + name + "," + codCountry;
-            /*return axios.get(url)
-                .then(e => e.data)
-                .catch(error => error);*/
             return _this.requestApi(filter);
         };
         /**
@@ -60,9 +57,6 @@ var ApiService = /** @class */ (function () {
          */
         this.searchByGeolocationGeographic = function (location) {
             var filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : "lat=" + location.lat + "&lon=" + location.lon;
-            /*return axios.get(url)
-                .then(e => e.data)
-                .catch(error => error);*/
             return _this.requestApi(filter);
         };
         /**
@@ -75,9 +69,6 @@ var ApiService = /** @class */ (function () {
         this.searchZipPostcode = function (cp, codCountry) {
             if (codCountry === void 0) { codCountry = ''; }
             var filter = (codCountry === '') ? "zip=" + cp : "zip=" + cp + "," + codCountry;
-            /*return axios.get(url)
-                .then(e => e.data)
-                .catch(error => error);*/
             return _this.requestApi(filter);
         };
         this.requestApi = function (filter) {
