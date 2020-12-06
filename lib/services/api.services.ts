@@ -50,15 +50,12 @@ export class ApiService {
      * searchByName('Barcelona', 'es');
      */
     public searchByName = (name: string, codCountry: string = '') => {
-        let params = `${this.units}${this.lang}&appid=${this.APIKEY}`;
-        let filter = (codCountry === '') ? `q=${name}` : `q=${name},${codCountry}`;
+        const filter = (codCountry === '') ? `q=${name}` : `q=${name},${codCountry}`;
 
-        // Llamada a la API
-        const url = `${URL_LOCALHOST}${CURRENT}${filter}${params}`;
-
-        return axios.get(url)
+        /*return axios.get(url)
             .then(e => e.data)
-            .catch(error => error);
+            .catch(error => error);*/
+        return this.requestApi(filter);
     };
 
     /**
@@ -68,15 +65,12 @@ export class ApiService {
      * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 });
      */
     public searchByGeolocationGeographic = (location: Coord) => {
-        let params = `${this.units}${this.lang}&appid=${this.APIKEY}`;
-        let filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : `lat=${location.lat}&lon=${location.lon}`;
+        const filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : `lat=${location.lat}&lon=${location.lon}`;
 
-        // Llamada a la API
-        const url = `${URL_LOCALHOST}${CURRENT}${filter}${params}`;
-
-        return axios.get(url)
+        /*return axios.get(url)
             .then(e => e.data)
-            .catch(error => error);
+            .catch(error => error);*/
+        return this.requestApi(filter);
     };
 
     /**
@@ -87,8 +81,17 @@ export class ApiService {
      * searchZipPostcode('08080', 'es');
      */
     public searchZipPostcode = (cp: string, codCountry: string = '') => {
-        let params = `${this.units}${this.lang}&appid=${this.APIKEY}`;
-        let filter = (codCountry === '') ? `zip=${cp}` : `zip=${cp},${codCountry}`;
+        const filter = (codCountry === '') ? `zip=${cp}` : `zip=${cp},${codCountry}`;
+
+        /*return axios.get(url)
+            .then(e => e.data)
+            .catch(error => error);*/
+        return this.requestApi(filter);
+    };
+
+    private requestApi = (filter: string) => {
+
+        const params = `${this.units}${this.lang}&appid=${this.APIKEY}`;
 
         // Llamada a la API
         const url = `${URL_LOCALHOST}${CURRENT}${filter}${params}`;
@@ -96,6 +99,7 @@ export class ApiService {
         return axios.get(url)
             .then(e => e.data)
             .catch(error => error);
+
     };
 
 };

@@ -46,4 +46,5 @@ export declare class ApiService {
      * searchZipPostcode('08080', 'es');
      */
     searchZipPostcode: (cp: string, codCountry?: string) => Promise<any>;
+    private requestApi;
 }

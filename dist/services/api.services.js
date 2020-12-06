@@ -46,13 +46,11 @@ var ApiService = /** @class */ (function () {
          */
         this.searchByName = function (name, codCountry) {
             if (codCountry === void 0) { codCountry = ''; }
-            var params = "" + _this.units + _this.lang + "&appid=" + _this.APIKEY;
             var filter = (codCountry === '') ? "q=" + name : "q=" + name + "," + codCountry;
-            // Llamada a la API
-            var url = "" + constants_1.URL_LOCALHOST + constants_1.CURRENT + filter + params;
-            return axios_1.default.get(url)
-                .then(function (e) { return e.data; })
-                .catch(function (error) { return error; });
+            /*return axios.get(url)
+                .then(e => e.data)
+                .catch(error => error);*/
+            return _this.requestApi(filter);
         };
         /**
          * Obtener el tiempo actual mediante la localización.
@@ -61,13 +59,11 @@ var ApiService = /** @class */ (function () {
          * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 });
          */
         this.searchByGeolocationGeographic = function (location) {
-            var params = "" + _this.units + _this.lang + "&appid=" + _this.APIKEY;
             var filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : "lat=" + location.lat + "&lon=" + location.lon;
-            // Llamada a la API
-            var url = "" + constants_1.URL_LOCALHOST + constants_1.CURRENT + filter + params;
-            return axios_1.default.get(url)
-                .then(function (e) { return e.data; })
-                .catch(function (error) { return error; });
+            /*return axios.get(url)
+                .then(e => e.data)
+                .catch(error => error);*/
+            return _this.requestApi(filter);
         };
         /**
          * Obtener el tiempo actual mediante el código postal del lugar.
@@ -78,8 +74,14 @@ var ApiService = /** @class */ (function () {
          */
         this.searchZipPostcode = function (cp, codCountry) {
             if (codCountry === void 0) { codCountry = ''; }
-            var params = "" + _this.units + _this.lang + "&appid=" + _this.APIKEY;
             var filter = (codCountry === '') ? "zip=" + cp : "zip=" + cp + "," + codCountry;
+            /*return axios.get(url)
+                .then(e => e.data)
+                .catch(error => error);*/
+            return _this.requestApi(filter);
+        };
+        this.requestApi = function (filter) {
+            var params = "" + _this.units + _this.lang + "&appid=" + _this.APIKEY;
             // Llamada a la API
             var url = "" + constants_1.URL_LOCALHOST + constants_1.CURRENT + filter + params;
             return axios_1.default.get(url)

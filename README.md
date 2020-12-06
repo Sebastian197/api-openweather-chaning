@@ -11,7 +11,7 @@ Primero debes registrarte en openweather dede aquí [OpenWeather](https://home.o
 Ejecutar este comando
 
 ```
-npm install openweather-api-chaning
+npm install api-ow-chaning
 ```
 ## Uso
 
@@ -20,7 +20,7 @@ Seguir estas instrucciones de uso
 
 ###  Poner la API key de Openweathermap
 
-Poner tu key en el archivo test/constants.js en **your-apiKey**
+Poner tu key en el archivo test/constants.js en **your-apiKey** para ejecutar las pruebas.
 
 ```JS
 module.exports = {
