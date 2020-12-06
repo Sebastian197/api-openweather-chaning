@@ -41,44 +41,52 @@ var ApiService = /** @class */ (function () {
          * Método para obtener el tiempo actual buscando mediante el nombre del lugar.
          * @param name {string} nombre del lugar.
          * @param codCountry {string} Código del país.
+         * @param anticipation {number} Días de previsión.
          * @example
-         * searchByName('Barcelona', 'es');
+         * searchByName('Barcelona', 'es'); || searchByName('Barcelona', 'es', 5);
          */
-        this.searchByName = function (name, codCountry) {
+        this.searchByName = function (name, codCountry, anticipation) {
             if (codCountry === void 0) { codCountry = ''; }
+            if (anticipation === void 0) { anticipation = 0; }
             var filter = (codCountry === '') ? "q=" + name : "q=" + name + "," + codCountry;
-            return _this.requestApi(filter);
+            return _this.requestApi(filter, anticipation);
         };
         /**
          * Método para obtener el tiempo actual mediante la localización.
          * @param location {Object} Coordenadas del lugar por el que se quiere buscar.
+         * @param anticipation {number} Días de previsión.
          * @example
-         * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 });
+         * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }); || searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }, 5);
          */
-        this.searchByGeolocationGeographic = function (location) {
+        this.searchByGeolocationGeographic = function (location, anticipation) {
+            if (anticipation === void 0) { anticipation = 0; }
             var filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : "lat=" + location.lat + "&lon=" + location.lon;
-            return _this.requestApi(filter);
+            return _this.requestApi(filter, anticipation);
         };
         /**
          * Método para obtener el tiempo actual mediante el código postal del lugar.
          * @param cp {string} Código postal del lugar.
          * @param codCountry {string} Código del país del lugar.
+         * @param anticipation {number} Días de previsión.
          * @example
-         * searchZipPostcode('08080', 'es');
+         * searchZipPostcode('08080', 'es'); || searchZipPostcode('08080', 'es', 5);
          */
-        this.searchZipPostcode = function (cp, codCountry) {
+        this.searchZipPostcode = function (cp, codCountry, anticipation) {
             if (codCountry === void 0) { codCountry = ''; }
+            if (anticipation === void 0) { anticipation = 0; }
             var filter = (codCountry === '') ? "zip=" + cp : "zip=" + cp + "," + codCountry;
-            return _this.requestApi(filter);
+            return _this.requestApi(filter, anticipation);
         };
         /**
          * Método privado que llama a la api con el fitro por el que se desea buscar.
-         * @param filter {string} filtro por el que se quiere buscar
+         * @param filter {string} filtro por el que se quiere busca.
+         * @param anticipation {number} Días de previsión.
          */
-        this.requestApi = function (filter) {
+        this.requestApi = function (filter, anticipation) {
+            anticipation = (anticipation !== 5 || isNaN(anticipation)) ? 0 : 5;
             var params = "" + _this.units + _this.lang + "&appid=" + _this.APIKEY;
             // Llamada a la API
-            var url = "" + constants_1.URL_LOCALHOST + constants_1.CURRENT + filter + params;
+            var url = (anticipation === 5) ? "" + constants_1.URL_LOCALHOST + constants_1.FORECAST + filter + params : "" + constants_1.URL_LOCALHOST + constants_1.CURRENT + filter + params;
             return axios_1.default.get(url)
                 .then(function (e) { return e.data; })
                 .catch(function (error) { return error; });

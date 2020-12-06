@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { URL_LOCALHOST, CURRENT } from '../constants/constants';
+import { URL_LOCALHOST, CURRENT, FORECAST } from '../constants/constants';
 import { LANGCODES } from '../constants/lang-codes';
 import { Coord } from '../interfaces/api.interface';
 
@@ -46,26 +46,28 @@ export class ApiService {
      * Método para obtener el tiempo actual buscando mediante el nombre del lugar.
      * @param name {string} nombre del lugar.
      * @param codCountry {string} Código del país.
+     * @param anticipation {number} Días de previsión.
      * @example
-     * searchByName('Barcelona', 'es');
+     * searchByName('Barcelona', 'es'); || searchByName('Barcelona', 'es', 5);
      */
-    public searchByName = (name: string, codCountry: string = '') => {
+    public searchByName = (name: string, codCountry: string = '', anticipation: number = 0) => {
 
         const filter = (codCountry === '') ? `q=${name}` : `q=${name},${codCountry}`;
-        return this.requestApi(filter);
+        return this.requestApi(filter, anticipation);
 
     };
 
     /**
      * Método para obtener el tiempo actual mediante la localización.
      * @param location {Object} Coordenadas del lugar por el que se quiere buscar.
+     * @param anticipation {number} Días de previsión.
      * @example
-     * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 });
+     * searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }); || searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }, 5);
      */
-    public searchByGeolocationGeographic = (location: Coord) => {
+    public searchByGeolocationGeographic = (location: Coord, anticipation: number = 0) => {
 
         const filter = (location === undefined || location === null) ? 'lat=-33.8473567&lon=150.651794' : `lat=${location.lat}&lon=${location.lon}`;
-        return this.requestApi(filter);
+        return this.requestApi(filter, anticipation);
 
     };
 
@@ -73,26 +75,29 @@ export class ApiService {
      * Método para obtener el tiempo actual mediante el código postal del lugar.
      * @param cp {string} Código postal del lugar.
      * @param codCountry {string} Código del país del lugar.
+     * @param anticipation {number} Días de previsión.
      * @example
-     * searchZipPostcode('08080', 'es');
+     * searchZipPostcode('08080', 'es'); || searchZipPostcode('08080', 'es', 5);
      */
-    public searchZipPostcode = (cp: string, codCountry: string = '') => {
+    public searchZipPostcode = (cp: string, codCountry: string = '', anticipation: number = 0) => {
 
         const filter = (codCountry === '') ? `zip=${cp}` : `zip=${cp},${codCountry}`;
-        return this.requestApi(filter);
+        return this.requestApi(filter, anticipation);
 
     };
 
     /**
      * Método privado que llama a la api con el fitro por el que se desea buscar.
-     * @param filter {string} filtro por el que se quiere buscar
+     * @param filter {string} filtro por el que se quiere busca.
+     * @param anticipation {number} Días de previsión.
      */
-    private requestApi = (filter: string) => {
+    private requestApi = (filter: string, anticipation: number) => {
 
+        anticipation = (anticipation !== 5 || isNaN(anticipation)) ? 0 : 5;
         const params = `${this.units}${this.lang}&appid=${this.APIKEY}`;
 
         // Llamada a la API
-        const url = `${URL_LOCALHOST}${CURRENT}${filter}${params}`;
+        const url = (anticipation === 5) ? `${URL_LOCALHOST}${FORECAST}${filter}${params}` : `${URL_LOCALHOST}${CURRENT}${filter}${params}`;
 
         return axios.get(url)
             .then(e => e.data)
