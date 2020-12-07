@@ -1,6 +1,7 @@
 # Openweathermap api librería
 [![Build Status](https://travis-ci.org/Sebastian197/api-openweather-chaning.svg?branch=main)](https://travis-ci.org/Sebastian197/api-openweather-chaning)
 [![npm version](https://badge.fury.io/js/api-ow-chaning.svg)](https://badge.fury.io/js/api-ow-chaning)
+[![Coverage Status](https://coveralls.io/repos/github/Sebastian197/api-openweather-chaning/badge.svg?branch=main)](https://coveralls.io/github/Sebastian197/api-openweather-chaning?branch=main)
 [![Documentation](https://raw.githubusercontent.com/Sebastian197/api-openweather-chaning/main/documentation/images/coverage-badge-documentation.svg?sanitize=true)](https://github.com/Sebastian197/api-openweather-chaning)
 
 
