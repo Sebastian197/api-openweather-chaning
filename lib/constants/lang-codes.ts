@@ -1,4 +1,8 @@
-export const LANGCODES = [
+/**
+ * Array de objetos donde se encuentran los países que se pueden usar y su código.
+ * @type {Array} LANGCODES array de objetos.
+ */
+export const LANGCODES: Array<any> = [
     { 'name': 'Arabic', 'code': 'ar' },
     { 'name': 'Bulgarian', 'code': 'bg' },
     { 'name': 'Catalan', 'code': 'ca' },

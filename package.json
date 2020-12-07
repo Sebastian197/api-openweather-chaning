@@ -6,7 +6,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "test": "mocha",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "compodoc": "npx compodoc -p tsconfig.doc.json"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "axios": "^0.21.0"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "chai": "^4.2.0",
     "mocha": "^8.2.1",
     "nock": "^13.0.5"

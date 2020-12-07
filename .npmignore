@@ -4,3 +4,4 @@ tests.js
 lib/
 test/
 .gitignore
+documentation/

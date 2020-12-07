@@ -1,0 +1,362 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>api-ow-chaning documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">api-ow-chaning documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="openweathermap-api-librería">Openweathermap api librería</h1>
+<p>Obtiene la respuesta del tiempo actual de un lugar usando diferentes opciones de filtro.</p>
+<h2 id="nota">Nota</h2>
+<p>Primero debes registrarte en openweather dede aquí <a href="https://home.openweathermap.org/users/sign_up">OpenWeather</a>, luego dirigirse hasta aquí <a href="https://home.openweathermap.org/api_keys">API keys</a> para crear y obtener su key, después copiar la key y pegarla en <strong>your-apiKey</strong>.</p>
+<h2 id="instalación">Instalación</h2>
+<p>Ejecutar este comando</p>
+<div><pre class="line-numbers"><code class="language-none">npm install api-ow-chaning</code></pre></div><h2 id="uso">Uso</h2>
+<p>Seguir estas instrucciones de uso</p>
+<h3 id="poner-la-api-key-de-openweathermap">Poner la API key de Openweathermap</h3>
+<p>Poner tu key en el archivo test/constants.js en <strong>your-apiKey</strong> para ejecutar las pruebas.</p>
+<div><pre class="line-numbers"><code class="language-JS">module.exports = {
+    API_KEY: &#39;your-apiKey&#39;,
+    API_URL: &#39;http://api.openweathermap.org&#39;
+};</code></pre></div><h3 id="como-añadirlo">Como añadirlo</h3>
+<div><pre class="line-numbers"><code class="language-JS">const lib = require(&#39;openweather-api-chaning&#39;);</code></pre></div><div><pre class="line-numbers"><code class="language-TS">import lib form &#39;openweather-api-chaning&#39;;</code></pre></div><h3 id="para-obtener-el-pronostico-del-tiempo-por-defecto-un-día">Para obtener el pronostico del tiempo, por defecto un día</h3>
+<ul>
+<li>Obtener el tiempo actual buscando mediante el nombre del lugar</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-JS">const m = lib.ApiService;
+
+const api = new m(&#39;your-apiKey&#39;, &#39;es&#39;, &#39;m&#39;);
+
+api.searchByName(&#39;Barcelona&#39;, &#39;es&#39;)
+    .then(data =&gt; console.log(data))
+    .catch(error =&gt; console.log(error));</code></pre></div><ul>
+<li>Obtener el tiempo actual mediante la localización</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-JS">const m = lib.ApiService;
+
+const api = new m(&#39;your-apiKey&#39;, &#39;es&#39;, &#39;m&#39;);
+
+api.searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 })
+    .then(data =&gt; console.log(data))
+    .catch(error =&gt; console.log(error));</code></pre></div><ul>
+<li>Obtener el tiempo actual mediante el código postal del lugar</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-JS">const m = lib.ApiService;
+
+const api = new m(&#39;your-apiKey&#39;, &#39;es&#39;, &#39;m&#39;);
+
+api.searchZipPostcode(&#39;08080&#39;, &#39;es&#39;)
+    .then(data =&gt; console.log(data))
+    .catch(error =&gt; console.log(error));</code></pre></div><p>// Espera una respuesta de este estilo:</p>
+<div><pre class="line-numbers"><code class="language-none">{
+    coord: { lon: 2.16, lat: 41.39 },
+    weather: [
+        {
+            id: 802,
+            main: &#39;Clouds&#39;,
+            description: &#39;nubes dispersas&#39;,
+            icon: &#39;03d&#39;
+        }
+    ],
+    base: &#39;stations&#39;,
+    main: {
+        temp: 10.39,
+        feels_like: 5.25,
+        temp_min: 8.89,
+        temp_max: 11.67,
+        pressure: 999,
+        humidity: 50
+    },
+    visibility: 10000,
+    wind: { speed: 4.6, deg: 320 },
+    clouds: { all: 40 },
+    dt: 1607173717,
+    sys: {
+        type: 1,
+        id: 6398,
+        country: &#39;ES&#39;,
+        sunrise: 1607151749,
+        sunset: 1607185327
+    },
+    timezone: 3600,
+    id: 3128760,
+    name: &#39;Barcelona&#39;,
+    cod: 200
+}</code></pre></div><h3 id="para-obtener-el-pronostico-del-tiempo-de-5-días">Para obtener el pronostico del tiempo de 5 días</h3>
+<p>Puede buscar el pronóstico del tiempo durante 5 días con datos cada 3 horas por nombre de ciudad añadiendo el flag true como ultimo parámetro.</p>
+<ul>
+<li>Obtener el tiempo actual buscando mediante el nombre del lugar</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-JS">const m = lib.ApiService;
+
+const api = new m(&#39;your-apiKey&#39;, &#39;es&#39;, &#39;m&#39;);
+
+api.searchByName(&#39;Barcelona&#39;, &#39;es&#39;, true)
+    .then(data =&gt; {
+
+        const { list } = data;
+        // example
+        list.forEach(e =&gt; {
+            console.log(e);
+        });
+
+    })
+    .catch(error =&gt; console.log(error));</code></pre></div><ul>
+<li>Obtener el tiempo actual mediante la localización</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-JS">const m = lib.ApiService;
+
+const api = new m(&#39;your-apiKey&#39;, &#39;es&#39;, &#39;m&#39;);
+
+api.searchByGeolocationGeographic({ lat: 43.2633534, lon: -2.951074 }, true)
+    .then(data =&gt; {
+
+        const { list } = data;
+        // example
+        list.forEach(e =&gt; {
+            console.log(e);
+        });
+
+    })
+    .catch(error =&gt; console.log(error));</code></pre></div><ul>
+<li>Obtener el tiempo actual mediante el código postal del lugar</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-JS">const m = lib.ApiService;
+
+const api = new m(&#39;your-apiKey&#39;, &#39;es&#39;, &#39;m&#39;);
+
+api.searchZipPostcode(&#39;08080&#39;, &#39;es&#39;, true)
+    .then(data =&gt; {
+
+        const { list } = data;
+        // example
+        list.forEach(e =&gt; {
+            console.log(e);
+        });
+
+    })
+    .catch(error =&gt; console.log(error));</code></pre></div><p>// Espera una respuesta de este estilo:</p>
+<div><pre class="line-numbers"><code class="language-none">{
+    cod: &quot;200&quot;,
+    message: 0,
+    cnt: 40,
+    list: [
+        {
+            dt: 1607256000,
+            main: {
+                temp: 282.82,
+                feels_like: 277.43,
+                temp_min: 282.82,
+                temp_max: 283.91,
+                pressure: 1003,
+                sea_level: 1003,
+                grnd_level: 996,
+                humidity: 62,
+                temp_kf: -1.09
+            },
+            weather: [
+                {
+                    id: 802,
+                    main: &quot;Clouds&quot;,
+                    description: &quot;scattered clouds&quot;,
+                    icon: &quot;03d&quot;
+                }
+            ],
+            clouds: {
+                all: 31
+            },
+            wind: {
+                speed: 5.49,
+                deg: 291
+            },
+            visibility: 10000,
+            pop: 0,
+            sys: {
+                pod: &quot;d&quot;
+            },
+            dt_txt: &quot;2020-12-06 12:00:00&quot;
+        },
+        {
+            dt: 1607266800,
+            main: {
+                temp: 284.14,
+                feels_like: 278.5,
+                temp_min: 284.14,
+                temp_max: 284.79,
+                pressure: 1002,
+                sea_level: 1002,
+                grnd_level: 996,
+                humidity: 57,
+                temp_kf: -0.65
+            },
+            weather: [
+                {
+                    id: 803,
+                    main: &quot;Clouds&quot;,
+                    description: &quot;broken clouds&quot;,
+                    icon: &quot;04d&quot;
+                }
+            ],
+            clouds: {
+                all: 64
+            },
+            wind: {
+                speed: 5.86,
+                deg: 286
+            },
+            visibility: 10000,
+            pop: 0,
+            sys: {
+                pod: &quot;d&quot;
+            },
+            dt_txt: &quot;2020-12-06 15:00:00&quot;
+        },
+        {
+            dt: 1607277600,
+            main: {
+                temp: 283.32,
+                feels_like: 278.46,
+                temp_min: 283.32,
+                temp_max: 283.42,
+                pressure: 1003,
+                sea_level: 1003,
+                grnd_level: 997,
+                humidity: 59,
+                temp_kf: -0.1
+            },
+            weather: [
+                {
+                    id: 802,
+                    main: &quot;Clouds&quot;,
+                    description: &quot;scattered clouds&quot;,
+                    icon: &quot;03n&quot;
+                }
+            ],
+            clouds: {
+                all: 46
+            },
+            wind: {
+                speed: 4.68,
+                deg: 305
+            },
+            visibility: 10000,
+            pop: 0,
+            sys: {
+                pod: &quot;n&quot;
+            },
+            dt_txt: &quot;2020-12-06 18:00:00&quot;
+        },
+        ....
+
+    ],
+    city: {
+        id: 3128760,
+            name: &quot;Barcelona&quot;,
+            coord: {
+            lat: 41.3888,
+            lon: 2.159
+        },
+        country: &quot;ES&quot;,
+        population: 1621537,
+        timezone: 3600,
+        sunrise: 1607238205,
+        sunset: 1607271721
+    }
+}</code></pre></div><h2 id="autor">Autor</h2>
+<p>El autor es <em><a href="https://github.com/Sebastian197">Sebastián Moreno Saavedra</a></em></p>
+<h2 id="license">License</h2>
+<p><a href="LICENSE">MIT</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="./js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="./js/menu-wc.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

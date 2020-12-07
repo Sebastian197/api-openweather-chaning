@@ -1,3 +1,9 @@
+/**
+ * Interfaz Api
+ * @interface
+ * @type {object} 
+ * @ignore
+ */
 export interface Api {
     coord: Coord;
     weather: Weather[];
@@ -14,6 +20,12 @@ export interface Api {
     cod: number;
 }
 
+/**
+ * Interfaz Sys
+ * @interface
+ * @type {object} 
+ * @ignore
+ */
 export interface Sys {
     type: number;
     id: number;
@@ -22,15 +34,33 @@ export interface Sys {
     sunset: number;
 }
 
+/**
+ * Interfaz Clouds
+ * @interface
+ * @type {object}
+ * @ignore 
+ */
 export interface Clouds {
     all: number;
 }
 
+/**
+ * Interfaz Wind
+ * @interface
+ * @type {object} 
+ * @ignore
+ */
 export interface Wind {
     speed: number;
     deg: number;
 }
 
+/**
+ * Interfaz Main
+ * @interface
+ * @type {object}
+ * @ignore
+ */
 export interface Main {
     temp: number;
     feels_like: number;
@@ -40,6 +70,12 @@ export interface Main {
     humidity: number;
 }
 
+/**
+ * Interfaz Weather
+ * @interface
+ * @type {object} 
+ * @ignore
+ */
 export interface Weather {
     id: number;
     main: string;
@@ -47,6 +83,12 @@ export interface Weather {
     icon: string;
 }
 
+/**
+ * Interfaz Coord
+ * @interface
+ * @type {object}
+ * @ignore
+ */
 export interface Coord {
     lon: number;
     lat: number;
