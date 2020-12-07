@@ -7,3 +7,5 @@ test/
 documentation/
 coverage/
 configuraciones.txt
+firebase.json
+.firebaserc
