@@ -1,6 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LANGCODES = void 0;
+/**
+ * Array de objetos donde se encuentran los países que se pueden usar y su código.
+ * @type {Array} LANGCODES array de objetos.
+ */
 exports.LANGCODES = [
     { 'name': 'Arabic', 'code': 'ar' },
     { 'name': 'Bulgarian', 'code': 'bg' },

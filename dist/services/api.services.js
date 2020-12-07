@@ -1,4 +1,9 @@
 "use strict";
+/**
+ * @author Sebastián Moreno Saavedra
+ * @version 1.0.4
+ * @license MIT
+ */
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -18,10 +23,35 @@ const constants_1 = require("../constants/constants");
 const lang_codes_1 = require("../constants/lang-codes");
 /**
  * Clase de la Apiservice.
+ * @class ApiService.
+ * @classdesc Esta clase llama a la api de openweathermap para consumir el pronostico del tiempo de lugares.
+ * @implements URL_LOCALHOST, CURRENT, FORECAST
+ * @example
+ * const m = require('./dist').ApiService;
+ * const api = new m('your-apiKey', 'es', 'm');
+ * api.searchByName('Barcelona', 'es')
+ *      .then(data => console.log(data));
+ *
+ * api.searchByGeolocationGeographic({ lat: -33.8473567, lon: 150.6517943 })
+ *      .then(data => console.log(data));
+ *
+ * api.searchZipPostcode('08080', 'es')
+ *      .then(data => console.log(data));
+ *
+ * api.searchZipPostcode('08080', 'es', true)
+ *      .then(data => {
+ *          const { list } = data;
+ *          // example
+ *          list.forEach(e => {
+ *          console.log(e);
+ *      });
+ * });
+ *
  */
 class ApiService {
     /**
      * Constructor que inicializa el ApiService.
+     * @constructor
      * @param APIKEY {string} Key de la api de Openweathermap.
      * @param lang {string} Código del idioma.
      * @param units {string} Unidad métrica de los datos.
@@ -29,6 +59,8 @@ class ApiService {
     constructor(APIKEY, lang = 'es', units = 'metric') {
         /**
          * Método privado para inicializar el código del idioma.
+         * @private
+         * @access private
          * @param lang {string} Código del idioma.
          */
         this.configLanguage = (lang) => {
@@ -38,6 +70,8 @@ class ApiService {
         };
         /**
          * Método privado para inicializar la unidad métrica en la que se medira los datos.
+         * @private
+         * @access private
          * @param unit {string} Métrica de los datos.
          */
         this.configUnits = (unit) => {
@@ -45,6 +79,7 @@ class ApiService {
         };
         /**
          * Método para obtener el tiempo actual buscando mediante el nombre del lugar.
+         * @public
          * @param name {string} nombre del lugar.
          * @param codCountry {string} Código del país.
          * @param anticipation {boolean} Flag de previsión.
@@ -59,6 +94,7 @@ class ApiService {
         };
         /**
          * Método para obtener el tiempo actual mediante la localización.
+         * @public
          * @param location {Object} Coordenadas del lugar por el que se quiere buscar.
          * @param anticipation {boolean} Flag de previsión.
          * @example
@@ -72,6 +108,7 @@ class ApiService {
         };
         /**
          * Método para obtener el tiempo actual mediante el código postal del lugar.
+         * @public
          * @param cp {string} Código postal del lugar.
          * @param codCountry {string} Código del país del lugar.
          * @param anticipation {boolean} Flag de previsión.
@@ -86,6 +123,9 @@ class ApiService {
         };
         /**
          * Método privado que llama a la api con el fitro por el que se desea buscar.
+         * @private
+         * @access private
+         * @async
          * @param filter {string} filtro por el que se quiere busca.
          * @param anticipation {boolean} Flag de previsión.
          * @returns
