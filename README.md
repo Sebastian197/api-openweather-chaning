@@ -1,4 +1,5 @@
 # Openweathermap api librería
+[![Build Status](https://travis-ci.org/Sebastian197/api-openweather-chaning.svg?branch=main)](https://travis-ci.org/Sebastian197/api-openweather-chaning)
 
 Obtiene la respuesta del tiempo actual de un lugar usando diferentes opciones de filtro.
 
