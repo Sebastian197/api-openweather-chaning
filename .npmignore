@@ -5,3 +5,5 @@ lib/
 test/
 .gitignore
 documentation/
+coverage/
+configuraciones.txt

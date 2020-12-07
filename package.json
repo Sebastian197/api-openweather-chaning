@@ -7,7 +7,8 @@
   "scripts": {
     "test": "mocha",
     "watch": "tsc -w",
-    "compodoc": "npx compodoc -p tsconfig.doc.json"
+    "compodoc": "npx compodoc -p tsconfig.doc.json",
+    "cover": "istanbul cover node_modules/mocha/bin/_mocha test/*.js -- -R spec"
   },
   "repository": {
     "type": "git",
@@ -30,6 +31,9 @@
   "devDependencies": {
     "@compodoc/compodoc": "^1.1.11",
     "chai": "^4.2.0",
+    "coveralls": "^3.1.0",
+    "install": "^0.13.0",
+    "istanbul": "^0.4.5",
     "mocha": "^8.2.1",
     "nock": "^13.0.5"
   }
