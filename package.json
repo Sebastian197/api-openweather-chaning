@@ -1,6 +1,6 @@
 {
   "name": "api-ow-chaning",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Api que te dice el tiempo actual de un lugar",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
